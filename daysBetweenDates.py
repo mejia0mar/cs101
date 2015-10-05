@@ -1,12 +1,21 @@
-# Credit goes to Websten from forums
-#
-# Use Dave's suggestions to finish your daysBetweenDates
-# procedure. It will need to take into account leap years
-# in addition to the correct number of days in each month.
+def isLeap(year):
+    if (year % 4 <> 0):
+        return False
+    if (year % 100 <> 0):
+        return True    
+    if (year % 400 <> 0):
+        return False
+    return True
+
+def daysInMonth(year, month):
+    if isLeap(year) and month ==2:
+        return 29
+    days = (0,31,28,31,30,31,30,31,31,30,31,30,31)
+    return days[month]
 
 def nextDay(year, month, day):
     """Simple version: assume every month has 30 days"""
-    if day < 30:
+    if day < daysInMonth(year, month):
         return year, month, day + 1
     else:
         if month == 12:
@@ -51,4 +60,16 @@ def test():
         else:
             print "Test case passed!"
 
+def testdaysInMonth():
+    sum = 0
+    for x in range (1, 13):
+        print (x, " ", daysInMonth(x))
+        sum = sum + daysInMonth(x)
+    print ("Total days: %s" % sum)
+
+def testleap():
+    for x in range (1990, 2015):
+        if isleap(x):
+            print (x, " True")
 test()
+#testdaysInMonth()
